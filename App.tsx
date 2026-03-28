@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import CaseStudies from './components/CaseStudies';
@@ -6,13 +6,31 @@ import Projects from './components/Projects';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Spotlight from './components/Spotlight';
+import CaseStudyDetail from './components/CaseStudyDetail';
+import ProjectDetail from './components/ProjectDetail';
+import { CaseStudy, Project } from './types';
+
+type View =
+  | { page: 'home' }
+  | { page: 'case-study'; data: CaseStudy }
+  | { page: 'project'; data: Project };
 
 const App: React.FC = () => {
+  const [view, setView] = useState<View>({ page: 'home' });
+
+  if (view.page === 'case-study') {
+    return <CaseStudyDetail study={view.data} onBack={() => setView({ page: 'home' })} />;
+  }
+
+  if (view.page === 'project') {
+    return <ProjectDetail project={view.data} onBack={() => setView({ page: 'home' })} />;
+  }
+
   return (
     <div className="bg-navy min-h-screen text-slate-100 selection:bg-primary selection:text-white relative overflow-hidden">
       {/* Global Effects */}
       <Spotlight />
-      
+
       {/* Ambient Background Blobs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
          <div className="absolute top-0 -left-40 w-96 h-96 bg-primary/20 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-blob"></div>
@@ -22,11 +40,11 @@ const App: React.FC = () => {
 
       {/* Structure */}
       <Header />
-      
+
       <main className="relative z-10">
         <Hero />
-        <CaseStudies />
-        <Projects />
+        <CaseStudies onViewStudy={(study: CaseStudy) => setView({ page: 'case-study', data: study })} />
+        <Projects onViewProject={(project: Project) => setView({ page: 'project', data: project })} />
         <Testimonials />
         <Contact />
       </main>

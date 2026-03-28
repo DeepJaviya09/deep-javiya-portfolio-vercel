@@ -5,6 +5,21 @@ export interface CaseStudy {
   image: string;
   challenge: string;
   result: string;
+  // Detail page fields
+  industry: string;
+  engagementType: string;
+  overview: string;
+  businessImpact: string;
+  solution: string;
+  myRole: string[];
+  beforeAfter: { label: string; before: string; after: string }[];
+  process: { step: string; description: string }[];
+  techStack: string[];
+  metrics: { label: string; value: string }[];
+  timeline: string;
+  role: string;
+  differently: string;
+  testimonialId?: number;
 }
 
 export interface Project {
@@ -12,8 +27,14 @@ export interface Project {
   title: string;
   description: string;
   tech: string[];
-  link?: string;
-  github?: string;
+  // Detail page fields
+  problemStatement: string;
+  longDescription: string;
+  technicalDecisions: { title: string; body: string }[];
+  features: string[];
+  scope: { label: string; value: string }[];
+  lessonsLearned: string;
+  engagementType: string;
 }
 
 export interface Testimonial {

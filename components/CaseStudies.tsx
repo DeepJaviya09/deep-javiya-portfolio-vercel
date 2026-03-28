@@ -1,12 +1,17 @@
 import React from 'react';
 import { CASE_STUDIES } from '../constants';
+import { CaseStudy } from '../types';
 import RevealOnScroll from './RevealOnScroll';
 
-const CaseStudies: React.FC = () => {
+interface Props {
+  onViewStudy: (study: CaseStudy) => void;
+}
+
+const CaseStudies: React.FC<Props> = ({ onViewStudy }) => {
   return (
     <section id="work" className="py-24 relative">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        
+
         <RevealOnScroll>
           <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
@@ -28,17 +33,17 @@ const CaseStudies: React.FC = () => {
 
             <div className="divide-y divide-white/10">
               {CASE_STUDIES.map((study, index) => (
-                <div 
-                  key={study.id} 
+                <div
+                  key={study.id}
                   className={`group relative flex flex-col lg:flex-row items-center gap-12 p-8 md:p-16 hover:bg-white/[0.02] transition-colors duration-500 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
                 >
                   {/* Image Side */}
                   <div className="w-full lg:w-1/2">
                      <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 group-hover:border-primary/30 transition-all duration-500 aspect-[4/3] group-hover:shadow-[0_0_50px_-12px_rgba(99,102,241,0.25)]">
                         <div className="absolute inset-0 bg-navy/20 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
-                        <img 
-                          src={study.image} 
-                          alt={study.title} 
+                        <img
+                          src={study.image}
+                          alt={study.title}
                           className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out-expo"
                         />
                         {/* Floating Badge */}
@@ -58,7 +63,7 @@ const CaseStudies: React.FC = () => {
                           {study.title}
                         </h3>
                      </div>
-                     
+
                      <div className="space-y-8 text-slate-400 mb-10">
                         <div>
                            <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Challenge</h4>
@@ -71,7 +76,10 @@ const CaseStudies: React.FC = () => {
                      </div>
 
                      <div>
-                       <button className="px-6 py-3 rounded-full bg-white/5 text-white font-bold text-sm hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2 group/btn border border-white/5 hover:border-primary/20">
+                       <button
+                         onClick={() => onViewStudy(study)}
+                         className="px-6 py-3 rounded-full bg-white/5 text-white font-bold text-sm hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2 group/btn border border-white/5 hover:border-primary/20"
+                       >
                           View Case Study
                           <svg className="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                        </button>

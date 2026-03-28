@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import avatar from '../assets/avatar.png';
 
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -28,8 +29,8 @@ const Header: React.FC = () => {
           <div className="relative w-10 h-10 flex items-center justify-center">
              <div className="absolute inset-0 bg-primary/20 rounded-xl transform rotate-0 group-hover:rotate-12 transition-transform duration-300"></div>
              <div className="absolute inset-0 bg-secondary/20 rounded-xl transform rotate-0 group-hover:-rotate-6 transition-transform duration-300 delay-75"></div>
-             <div className="relative w-10 h-10 border border-white/10 bg-white/5 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                <div className="w-3 h-3 bg-gradient-to-tr from-primary to-accent rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></div>
+             <div className="relative w-10 h-10 border border-white/10 bg-white/5 backdrop-blur-sm rounded-xl flex items-center justify-center overflow-hidden">
+                <img src={avatar} alt="Deep Javiya" className="w-full h-full object-cover" />
              </div>
           </div>
           <span className="font-display font-bold text-xl tracking-tight hidden sm:block text-slate-100">Deep Javiya</span>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { TECH_STACK } from '../constants';
+import avatar from '../assets/avatar.png';
 import RevealOnScroll from './RevealOnScroll';
 
 const Hero: React.FC = () => {
@@ -62,26 +63,11 @@ const Hero: React.FC = () => {
                       
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/10 opacity-50"></div>
                       
-                      <img 
-                        src="https://picsum.photos/600/600?grayscale" 
-                        alt="Deep Javiya" 
+                      <img
+                        src={avatar}
+                        alt="Deep Javiya"
                         className="w-full h-full object-cover mix-blend-overlay opacity-80 group-hover:scale-110 transition-transform duration-1000"
                       />
-                      
-                      {/* Code Overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-navy to-transparent">
-                        <div className="bg-black/40 backdrop-blur-md p-4 rounded-2xl border border-white/10">
-                           <div className="flex gap-1.5 mb-3">
-                             <div className="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
-                             <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
-                             <div className="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
-                           </div>
-                           <div className="font-mono text-xs text-slate-300 space-y-1">
-                             <div className="flex"><span className="text-secondary mr-2">const</span> <span className="text-accent">engineer</span> = <span className="text-white">new</span> <span className="text-primary">Dev()</span>;</div>
-                             <div className="flex"><span className="text-white">engineer</span>.<span className="text-secondary">deploy</span>(<span className="text-green-400">'Success'</span>);</div>
-                           </div>
-                        </div>
-                      </div>
                     </div>
                   </div>
 
