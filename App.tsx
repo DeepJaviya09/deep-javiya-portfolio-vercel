@@ -44,7 +44,7 @@ const App: React.FC = () => {
       <main className="relative z-10">
         <Hero />
         <CaseStudies onViewStudy={(study: CaseStudy) => setView({ page: 'case-study', data: study })} />
-        <Projects onViewProject={(project: Project) => setView({ page: 'project', data: project })} />
+        {/* <Projects onViewProject={(project: Project) => setView({ page: 'project', data: project })} /> */}
         <Testimonials />
         <Contact />
       </main>

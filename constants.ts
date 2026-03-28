@@ -7,44 +7,46 @@ export const TECH_STACK = [
 export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 1,
-    title: "FinTech Data Pipeline",
-    category: "Backend Architecture",
-    industry: "FinTech",
+    title: "PrimeCX — AI Chatbot Platform",
+    category: "Full Stack Architecture",
+    industry: "AI SaaS",
     engagementType: "Full Build",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop",
-    challenge: "Legacy systems were taking 48 hours to process daily transaction reconciliation.",
-    result: "75% Reduction in processing time via optimized SQL & Redis caching.",
-    overview: "A mid-sized FinTech company was struggling with overnight batch jobs that reconciled thousands of daily transactions across multiple banking APIs. The 48-hour delay was causing compliance issues and blocking the finance team from making real-time decisions.",
-    businessImpact: "Cutting reconciliation time from 48 hours to 12 meant the finance team could close books same-day and catch fraud 3× faster — directly reducing regulatory exposure and unlocking real-time decision-making they'd never had before.",
-    solution: "Redesigned the ETL pipeline from a monolithic cron job into a distributed worker system using Laravel Queues backed by Redis. Introduced parallel processing lanes for different transaction types, replaced N+1 ORM queries with raw optimized SQL, and added a Redis-based result cache to avoid redundant API calls.",
+    image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&h=600&fit=crop",
+    challenge: "A growing digital agency had no scalable delivery model, no white-label infrastructure, and no way to monetize recurring chatbot usage across multiple tenants.",
+    result: "Built a fully white-labeled, multi-tenant SaaS — agencies onboard clients in minutes, deploy chatbots instantly, and collect recurring revenue without writing a single line of code per client.",
+    overview: "A growing digital agency needed a way to sell AI-powered chatbots to their clients without building a new product for every customer. They had no scalable delivery model, no white-label infrastructure, and no way to monetize recurring chatbot usage across multiple tenants.",
+    businessImpact: "Going from zero to a fully billable, white-label AI chatbot platform meant the agency could onboard new clients in minutes instead of weeks, charge recurring subscriptions, and let customers self-serve — turning a services business into a scalable SaaS product with predictable monthly revenue.",
+    solution: "Architected a three-tier system: a Laravel backend for multi-tenant user management, subscriptions, and API orchestration; a Python/Flask microservice for AI operations (embeddings, RAG, document processing, web scraping) backed by ChromaDB for vector storage; and a React widget for embeddable chatbot delivery. Integrated Stripe Connect for agency-level billing and sub-account management, and Google Calendar API for appointment scheduling inside the chatbot flow.",
     myRole: [
-      "Architecture decisions — designed the distributed queue topology",
-      "DB schema optimization — rewrote N+1 ORM calls as optimized raw SQL",
-      "API design — modelled the banking API abstraction layer",
-      "Deployment — containerized and staged rollout with feature flags"
+      "System architecture — designed the three-tier service topology and API contracts between Laravel, Python, and React",
+      "AI pipeline — built the RAG pipeline with multi-provider support (OpenAI, Groq, Ollama, HuggingFace) and ChromaDB vector storage",
+      "Multi-tenancy — implemented custom domain middleware, agency sub-accounts, and role-based access control",
+      "Billing — integrated Stripe subscriptions + Stripe Connect with credit-based message metering",
+      "Widget — built the React chatbot widget with lead forms, appointment booking, and agent handoff"
     ],
     beforeAfter: [
-      { label: "Processing Time", before: "48 hrs", after: "12 hrs" },
-      { label: "Daily API Calls", before: "~500K (redundant)", after: "~200K (cached)" },
-      { label: "Reconciliation", before: "Next-day close", after: "Same-day close" }
+      { label: "Client Onboarding", before: "Days (manual setup)", after: "Minutes (self-serve)" },
+      { label: "Chatbot Deployment", before: "Custom dev per client", after: "Instant embed widget" },
+      { label: "Billing", before: "Manual invoicing", after: "Automated via Stripe" },
+      { label: "AI Training", before: "None", after: "Docs, PDFs, website scraping" }
     ],
     process: [
-      { step: "Discovery", description: "Audited existing cron jobs, identified N+1 query chains, and mapped all external banking API dependencies." },
-      { step: "Design", description: "Designed a distributed worker topology with separate processing lanes per transaction type." },
-      { step: "Build", description: "Rewrote ETL using Laravel Queues + Redis Horizon; replaced ORM calls with optimized raw SQL." },
-      { step: "Deploy", description: "Containerized with Docker; staged rollout with feature flags to validate against live data." },
-      { step: "Results", description: "Processing time dropped from 48hrs to 12hrs — finance team gained same-day book-close capability." }
+      { step: "Discovery", description: "Mapped agency workflow: how clients would be onboarded, how chatbots would be trained, and what billing model would support white-labeling." },
+      { step: "Architecture", description: "Designed the three-service topology (Laravel + Python AI microservice + React widget) with clean API contracts between each layer." },
+      { step: "Build", description: "Built Laravel multi-tenant auth with custom domain routing, Python RAG pipeline with ChromaDB, and React embed widget with lead collection, appointment booking, and agent handoff." },
+      { step: "Billing", description: "Integrated Stripe + Stripe Connect for platform-level subscriptions and agency sub-account payouts; implemented credit-based message metering per plan tier." },
+      { step: "Deploy", description: "Deployed Laravel on shared/VPS hosting with Python microservice running separately; React widget served as a distributable embed script." }
     ],
-    techStack: ["Laravel", "Redis", "MySQL", "Docker", "PostgreSQL", "Horizon"],
+    techStack: ["Laravel", "PHP", "Python", "Flask", "React", "MySQL", "ChromaDB", "OpenAI", "Stripe", "AWS S3", "Google Calendar API", "Vite"],
     metrics: [
-      { label: "Processing Time", value: "–75%" },
-      { label: "Daily Transactions", value: "500K+" },
-      { label: "API Calls Saved", value: "~60%" },
-      { label: "Downtime", value: "Zero" }
+      { label: "AI Providers", value: "3" },
+      { label: "Training Sources", value: "4" },
+      { label: "Manual Onboarding", value: "Zero" },
+      { label: "Multi-tenant", value: "Agency + Sub-accounts" }
     ],
-    timeline: "6 weeks",
-    role: "Lead Backend Engineer",
-    differently: "I'd introduce a dedicated data warehouse (e.g. ClickHouse) from the start rather than squeezing analytics queries into the transactional MySQL database. It would have decoupled reporting load from write performance even further, and avoided the indexing compromises we had to make late in the project.",
+    timeline: "10 weeks",
+    role: "Lead Full Stack Engineer",
+    differently: "I'd decouple the Python microservice earlier with an async job queue (Celery + Redis) rather than synchronous HTTP calls from Laravel. Long-running training jobs — especially website crawls and large PDF processing — block the request cycle under load. An event-driven training pipeline would have made the system more resilient and opened the door to real-time training progress feedback in the UI without polling.",
     testimonialId: 1
   },
   {
@@ -92,45 +94,48 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     id: 3,
-    title: "E-Commerce Scale Up",
-    category: "Full Stack",
-    industry: "E-Commerce",
+    title: "ProducOps — B2B Order & Inventory Management System",
+    category: "Operations Automation",
+    industry: "Food & Beverage",
     engagementType: "Full Build",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop",
-    challenge: "Platform crashed during peak traffic events due to database locks.",
-    result: "200% Traffic capacity increase and sub-100ms load times.",
-    overview: "A growing e-commerce brand was experiencing database deadlocks and 500 errors during flash sales. Their single-server Laravel + MySQL stack couldn't handle concurrent cart and inventory writes, causing lost revenue and customer frustration.",
-    businessImpact: "Eliminating flash-sale crashes and cutting load time to under 100ms translated directly into an 18% lift in conversion rate — meaning every major sale event now generates significantly more revenue without incident, and the engineering team stopped dreading launch days.",
-    solution: "Migrated the architecture to a horizontally scalable setup with read replicas, introduced optimistic locking for inventory management, offloaded image delivery to a CDN, and implemented a Redis-backed session and cart store. Deployed via Docker on a managed Kubernetes cluster for auto-scaling during traffic spikes.",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop",
+    challenge: "A traditional bakery and confectionery business was managing their entire order-to-production workflow manually — spreadsheets, WhatsApp messages, and verbal handoffs — with no traceability, no cutoff enforcement, and no inventory visibility.",
+    result: "Replaced a fully manual operation with a centralised, role-based system covering real-time order management, automated cutoff enforcement, live inventory tracking, and one-click Excel import/export.",
+    overview: "A traditional bakery and confectionery business producing handcrafted treats was managing their entire order-to-production workflow manually — spreadsheets, WhatsApp messages, and verbal handoffs between the sales desk, production floor, and warehouse. The business was growing, and the manual approach was becoming a liability — both operationally and in terms of customer satisfaction.",
+    businessImpact: "A system like this transforms a food production business from reactive to proactive. When staff can see in real-time which orders landed before cutoff, what stock is available, and what needs to be produced — you stop firefighting and start executing. The production team stops spending time on 'do we have enough?' and starts focusing on making great product. The sales team stops digging through WhatsApp threads and starts closing orders confidently.",
+    solution: "Built a full-stack web application with a React + TypeScript SPA frontend and a Laravel 10 REST API backend, backed by PostgreSQL. The core of the system is a dedicated InventoryService handling UoM conversion math and ledger transactions — when an order for 2 BOX2 packages is imported, the service applies the conversion factor and deducts the correct quantity from the ledger, cascading through BOM recipes and packaging compositions. Orders are automatically tagged before or after the 2 PM production cutoff at the point of creation or import. A 6-sheet Excel import pipeline handles master data initialisation (UOM → Ingredients → Packaging → Products → Recipes → Packaging Composition) with referential validation at each step.",
     myRole: [
-      "Database architecture — designed read/write replica split and optimistic locking strategy",
-      "Caching layer — built Redis-backed session and cart store",
-      "CDN integration — configured asset offloading and cache invalidation",
-      "Kubernetes deployment — containerized app with autoscaling policies",
-      "Load testing — designed and executed traffic simulation scenarios"
+      "System architecture — database schema design, API contract definition, frontend state management strategy",
+      "Backend (Laravel) — all 12+ controllers, Eloquent models, Sanctum auth, Excel import/export, UoM conversion service, RBAC middleware",
+      "Frontend (React/TypeScript) — full SPA: routing, protected routes, all 19 page components, Shadcn/ui integration, React Query data layer, form validation",
+      "Business logic — UoM conversion formula implementation, cutoff time enforcement, inventory ledger with full audit trail",
+      "Documentation — user story guides, import format specs, execution plans for client handoff"
     ],
     beforeAfter: [
-      { label: "Traffic Capacity", before: "Crashed at 2× baseline", after: "Handles 6× baseline" },
-      { label: "Page Load Time", before: "~1.2s", after: "< 100ms" },
-      { label: "Error Rate (peak)", before: "~15%", after: "< 0.1%" }
+      { label: "Order Visibility", before: "Fragmented (WhatsApp + spreadsheets)", after: "Centralised, real-time dashboard" },
+      { label: "Cutoff Enforcement", before: "Manual / inconsistent", after: "Automated — flagged at ingestion" },
+      { label: "Inventory Tracking", before: "Manual spreadsheet", after: "Live ledger with full audit trail" },
+      { label: "Bulk Order Import", before: "Manual re-entry", after: "One-click Excel import + auto stock deduction" },
+      { label: "Reporting", before: "None", after: "Daily/Monthly/Yearly Excel export" },
+      { label: "Multi-user Access", before: "None", after: "Role-based (HR Admin, Manager, Employee)" }
     ],
     process: [
-      { step: "Discovery", description: "Profiled slow queries under load; identified deadlock patterns in concurrent cart and inventory writes." },
-      { step: "Design", description: "Planned horizontal scaling: read replicas, optimistic locking, and Redis-backed session/cart layer." },
-      { step: "Build", description: "Migrated to a read/write split, introduced optimistic locking, offloaded static assets to CDN." },
-      { step: "Deploy", description: "Containerized with Docker; deployed to Kubernetes with autoscaling policies for traffic bursts." },
-      { step: "Results", description: "+200% traffic capacity, sub-100ms load times, 18% conversion lift at the next flash sale." }
+      { step: "Discovery", description: "Mapped the entire operational workflow end-to-end: how orders arrive, how production cutoff is decided, how warehouse staff consume stock, and what management needs to see. Catalogued all product SKUs, raw materials, packaging types, and UoM conversion relationships." },
+      { step: "Design", description: "Designed the database schema with referential integrity across all master data tables. Defined the UoM conversion formula and where it fires in the import pipeline. Designed the RBAC model and wireframed all 10+ pages with the client." },
+      { step: "Build", description: "Backend first: all 12+ API controllers, Eloquent models, and Excel import/export classes. Frontend second: full React SPA — AppSidebar with permission-filtered navigation, Dashboard KPI cards, Orders table, Inventory dashboard with ledger view, all Master Data CRUD pages, and Reports archive." },
+      { step: "Data Import", description: "Built a 6-sheet Excel import flow for master data initialisation with validation at each step, referencing previously loaded data. Documented the exact import order and field mapping for the client's ongoing use." },
+      { step: "Handoff", description: "Produced full documentation: user journey guides per persona, inventory deduction mechanics, and import format specs. Delivered a production-ready build with all test users seeded." }
     ],
-    techStack: ["Laravel", "MySQL", "Redis", "Docker", "Kubernetes", "Tailwind", "Vue"],
+    techStack: ["React", "TypeScript", "Laravel", "PostgreSQL", "TailwindCSS", "Shadcn/ui", "TanStack Query", "React Hook Form", "Recharts", "Laravel Sanctum", "Google OAuth", "Vite"],
     metrics: [
-      { label: "Traffic Capacity", value: "+200%" },
-      { label: "Page Load Time", value: "< 100ms" },
-      { label: "Error Rate", value: "–99%" },
-      { label: "Conversion Rate", value: "+18%" }
+      { label: "API Controllers", value: "12+" },
+      { label: "Page Components", value: "19" },
+      { label: "User Roles", value: "5" },
+      { label: "Manual Processes", value: "Zero" }
     ],
-    timeline: "10 weeks",
+    timeline: "10–12 weeks",
     role: "Full-Stack Engineer",
-    differently: "I'd push for a controlled real-traffic ramp ('game day') earlier in the process. We validated against load testing tools, but a few edge cases in session state only appeared on launch day — a staged production traffic test would have caught them beforehand.",
+    differently: "The UoM conversion logic was built as a service method inside the import pipeline. In hindsight, I'd extract it into a standalone, unit-tested UomConversionEngine class from day one — because it underpins every inventory calculation and any bug there silently corrupts the entire ledger. I'd also build the RBAC permission matrix as a config file (JSON/YAML) rather than hardcoded in middleware and frontend logic, so the client can adjust role permissions without a code deploy.",
     testimonialId: 3
   }
 ];
