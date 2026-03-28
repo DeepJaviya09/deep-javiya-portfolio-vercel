@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import RevealOnScroll from './RevealOnScroll';
 
-const SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL as string;
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8CAVVHYvxIllxO7QtSaiu93TEXYCMSeFdHTI13vbYPEzSVx01NIrixiI61SjrnWV0/exec';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
